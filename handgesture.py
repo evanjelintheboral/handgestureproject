@@ -38,7 +38,7 @@ print("Hand Gesture Control Started... Press 'q' to exit")
 while True:
     success, img = cap.read()
 
-    # 🔒 Prevent sudden close
+    #  Prevent sudden close
     if not success:
         print("Frame dropped, retrying...")
         continue
@@ -57,7 +57,7 @@ while True:
             index_tip = lm[8]
 
             # =========================
-            # ✅ FINGER DETECTION
+            #  FINGER DETECTION
             # =========================
             fingers = []
 
@@ -71,7 +71,7 @@ while True:
             current_time = time.time()
 
             # =========================
-            # ✅ CURSOR MOVE
+            #  CURSOR MOVE
             # =========================
             if fingers == [0,1,0,0,0]:
                 x = int(index_tip.x * screen_w)
@@ -81,7 +81,7 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
 
             # =========================
-            # ✅ CLICK
+            #  CLICK
             # =========================
             dist = math.hypot(thumb_tip.x - index_tip.x,
                               thumb_tip.y - index_tip.y)
@@ -93,7 +93,7 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,0), 2)
 
             # =========================
-            # ✅ SCROLL UP (2 fingers)
+            #  SCROLL UP (2 fingers)
             # =========================
             if fingers == [0,1,1,0,0] and current_time - last_scroll_time > scroll_delay:
                 pyautogui.scroll(60)
@@ -102,7 +102,7 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
 
             # =========================
-            # ✅ SCROLL DOWN (3 fingers)
+            #  SCROLL DOWN (3 fingers)
             # =========================
             elif fingers == [0,1,1,1,0] and current_time - last_scroll_time > scroll_delay:
                 pyautogui.scroll(-60)
@@ -111,7 +111,7 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
 
             # =========================
-            # ✅ SCREENSHOT
+            #  SCREENSHOT
             # =========================
             if fingers == [0,0,0,0,0] and current_time - last_screenshot_time > screenshot_delay:
                 pyautogui.screenshot(f"screenshot_{int(current_time)}.png")
